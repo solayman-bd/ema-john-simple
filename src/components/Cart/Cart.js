@@ -2,7 +2,7 @@ import React from "react";
 
 const Cart = (props) => {
   const cart = props.cart;
-  console.log(cart);
+
   let totalPrice = 0;
   let totalTax = 0;
   let totalShipping = 0;
