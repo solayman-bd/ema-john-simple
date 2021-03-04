@@ -17,8 +17,8 @@ const Cart = (props) => {
       <h3>Order Summery</h3>
       <h4>Items Ordered : {cart.length}</h4>
       <h4>Tax 10% : {totalTax}</h4>
-      <h4>Shipping Charge: {Math.round(totalShipping)}</h4>
-      <h4>Total Price : {totalPrice.toFixed(2)}</h4>
+      <h4>Shipping Charge: ${Math.round(totalShipping)}</h4>
+      <h4>Total Price : ${totalPrice.toFixed(2)}</h4>
     </div>
   );
 };
