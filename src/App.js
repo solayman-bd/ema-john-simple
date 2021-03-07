@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import OrderReview from "./components/OrderReview/OrderReview";
 import ManageInventory from "./components/ManageInventory/ManageInventory";
 import NotFound from "./components/NotFound/NotFound";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
@@ -23,6 +25,9 @@ function App() {
           </Route>
           <Route exact path="/">
             <Shop></Shop>
+          </Route>
+          <Route path="/product/:productKey">
+            <ProductDetails></ProductDetails>
           </Route>
           <Route path="*">
             <NotFound></NotFound>
