@@ -11,10 +11,13 @@ const Cart = (props) => {
   let totalShipping = 0;
   for (let i = 0; i < cart.length; i++) {
     const product = cart[i];
-    totalPrice = totalPrice + product.price * product.quantity;
+
     totalShipping = totalShipping + product.shipping;
+    totalPrice = totalPrice + product.price * product.quantity + totalShipping;
   }
-  totalTax = (totalTax + totalPrice * 0.1).toFixed(2);
+  totalTax = parseFloat((totalTax + totalPrice * 0.1).toFixed(2));
+
+  totalPrice = totalPrice + totalTax;
 
   return (
     <div>

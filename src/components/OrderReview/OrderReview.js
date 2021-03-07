@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import fakeData from "../../fakeData";
 import {
   getDatabaseCart,
+  processOrder,
   removeFromDatabaseCart,
 } from "../../utilities/databaseManager";
 import Cart from "../Cart/Cart";
 import ReviewItems from "../ReviewItems/ReviewItems";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./OrderReview.css";
+import greeting from "../../images/giphy.gif";
 
 const OrderReview = () => {
   const [cart, setCart] = useState([]);
@@ -16,6 +18,7 @@ const OrderReview = () => {
     setCart(newCart);
     removeFromDatabaseCart(pdKey);
   };
+  const [greetingMessage, setGretingMessage] = useState(false);
   useEffect(() => {
     const savedData = getDatabaseCart();
     const productKeys = Object.keys(savedData);
@@ -28,6 +31,16 @@ const OrderReview = () => {
 
     setCart(cartProducts);
   }, []);
+
+  const placeOrderHandler = () => {
+    processOrder();
+    setCart([]);
+    setGretingMessage(true);
+  };
+  let thankYou;
+  if (greetingMessage) {
+    thankYou = <img src={greeting} alt="" />;
+  }
   return (
     <div className="d-flex">
       <div className="review-div">
@@ -41,10 +54,13 @@ const OrderReview = () => {
             ></ReviewItems>
           ))}
         </div>
+        {thankYou}
       </div>
       <div className="ml-2">
         <Cart cart={cart}>
-          <button className="btn btn-warning">Place Order</button>
+          <button onClick={placeOrderHandler} className="btn btn-warning">
+            Place Order
+          </button>
         </Cart>
       </div>
     </div>
