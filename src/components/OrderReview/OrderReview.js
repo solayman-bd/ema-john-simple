@@ -10,6 +10,7 @@ import ReviewItems from "../ReviewItems/ReviewItems";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./OrderReview.css";
 import greeting from "../../images/giphy.gif";
+import { useHistory } from "react-router";
 
 const OrderReview = () => {
   const [cart, setCart] = useState([]);
@@ -31,11 +32,10 @@ const OrderReview = () => {
 
     setCart(cartProducts);
   }, []);
+  const history = useHistory();
 
-  const placeOrderHandler = () => {
-    processOrder();
-    setCart([]);
-    setGretingMessage(true);
+  const proceedCheckOut = () => {
+    history.push("/shipment");
   };
   let thankYou;
   if (greetingMessage) {
@@ -58,8 +58,8 @@ const OrderReview = () => {
       </div>
       <div className="ml-2">
         <Cart cart={cart}>
-          <button onClick={placeOrderHandler} className="btn btn-warning">
-            Place Order
+          <button onClick={proceedCheckOut} className="btn btn-warning">
+            Proceed to Checkout
           </button>
         </Cart>
       </div>
