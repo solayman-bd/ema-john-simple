@@ -1,0 +1,15 @@
+.ship-form input {
+  display: block;
+  margin: 1px auto;
+  padding: 2px;
+  border: 1 px solid gray;
+  width: 300px;
+}
+.error {
+  color: red;
+
+  margin: 0 auto;
+}
+.ship-form {
+  margin: 30px auto;
+}
