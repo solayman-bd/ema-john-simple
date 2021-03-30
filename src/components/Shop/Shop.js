@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Shop.css";
-import fakeData from "../../fakeData";
+
 import Product from "../Product/Product";
 import Cart from "../Cart/Cart";
 import {
@@ -10,22 +10,28 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 const Shop = () => {
-  const first10 = fakeData.slice(0, 10);
-  const [products, setProducts] = useState(first10);
+  useEffect(() => {
+    fetch(`http://localhost:4000/products`)
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, []);
+  // const first10 = fakeData.slice(0, 10);
+  const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const savedData = getDatabaseCart();
     const productKeys = Object.keys(savedData);
 
-    const cartProducts = productKeys.map((key) => {
-      const product = fakeData.find((pd) => pd.key === key);
-      product.quantity = savedData[key];
-      return product;
-    });
-
-    setCart(cartProducts);
-  }, []);
+    if (products.length > 0) {
+      const cartProducts = productKeys.map((key) => {
+        const product = products.find((pd) => pd.key === key);
+        product.quantity = savedData[key];
+        return product;
+      });
+      setCart(cartProducts);
+    }
+  }, [products]);
   const handleClick = (product) => {
     const toBeAdded = product.key;
     const sameProduct = cart.find((pd) => pd.key === toBeAdded);
