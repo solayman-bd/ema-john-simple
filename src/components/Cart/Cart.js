@@ -13,7 +13,8 @@ const Cart = (props) => {
     const product = cart[i];
 
     totalShipping = totalShipping + product.shipping;
-    totalPrice = totalPrice + product.price * product.quantity + totalShipping;
+    totalPrice =
+      totalPrice + product.price * product.quantity || 1 + totalShipping;
   }
   totalTax = parseFloat((totalTax + totalPrice * 0.1).toFixed(2));
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import fakeData from "../../fakeData";
+
 import {
   getDatabaseCart,
   processOrder,
@@ -23,14 +23,13 @@ const OrderReview = () => {
   useEffect(() => {
     const savedData = getDatabaseCart();
     const productKeys = Object.keys(savedData);
-
-    const cartProducts = productKeys.map((key) => {
-      const product = fakeData.find((pd) => pd.key === key);
-      product.quantity = savedData[key];
-      return product;
-    });
-
-    setCart(cartProducts);
+    fetch(`https://peaceful-plains-09302.herokuapp.com/productsByKeys`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(productKeys),
+    })
+      .then((res) => res.json())
+      .then((data) => setCart(data));
   }, []);
   const history = useHistory();
 
