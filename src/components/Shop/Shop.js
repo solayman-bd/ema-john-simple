@@ -10,14 +10,15 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 const Shop = () => {
-  useEffect(() => {
-    fetch(`https://peaceful-plains-09302.herokuapp.com/products`)
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, []);
-  // const first10 = fakeData.slice(0, 10);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
+  const [search, setSearch] = useState("");
+  useEffect(() => {
+    fetch(`http://localhost:4000/products?search=${search}`)
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, [search]);
+  // const first10 = fakeData.slice(0, 10);
 
   useEffect(() => {
     const savedData = getDatabaseCart();
@@ -30,6 +31,10 @@ const Shop = () => {
       .then((res) => res.json())
       .then((data) => setCart(data));
   }, []);
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+    console.log(event.target.value);
+  };
   const handleClick = (product) => {
     const toBeAdded = product.key;
     const sameProduct = cart.find((pd) => pd.key === toBeAdded);
@@ -51,6 +56,12 @@ const Shop = () => {
   return (
     <div className="shop-container">
       <div className="products-container">
+        <input
+          onBlur={handleSearch}
+          type="text"
+          name="search"
+          className="product-search"
+        />
         {products.map((pd) => (
           <Product
             showAddToCart={true}
