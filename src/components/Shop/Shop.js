@@ -14,7 +14,9 @@ const Shop = () => {
   const [cart, setCart] = useState([]);
   const [search, setSearch] = useState("");
   useEffect(() => {
-    fetch(`http://localhost:4000/products?search=${search}`)
+    fetch(
+      `https://peaceful-plains-09302.herokuapp.com/products?search=${search}`
+    )
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, [search]);
@@ -61,6 +63,7 @@ const Shop = () => {
           type="text"
           name="search"
           className="product-search"
+          placeholder="Search Products"
         />
         {products.map((pd) => (
           <Product
