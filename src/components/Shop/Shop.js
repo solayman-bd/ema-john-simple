@@ -14,9 +14,7 @@ const Shop = () => {
   const [cart, setCart] = useState([]);
   const [search, setSearch] = useState("");
   useEffect(() => {
-    fetch(
-      `https://peaceful-plains-09302.herokuapp.com/products?search=${search}`
-    )
+    fetch(`http://localhost:4000/products?search=${search}`)
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, [search]);
@@ -25,7 +23,7 @@ const Shop = () => {
   useEffect(() => {
     const savedData = getDatabaseCart();
     const productKeys = Object.keys(savedData);
-    fetch(`https://peaceful-plains-09302.herokuapp.com/productsByKeys`, {
+    fetch(`http://localhost:4000/productsByKeys`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(productKeys),

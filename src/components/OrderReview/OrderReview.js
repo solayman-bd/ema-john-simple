@@ -23,7 +23,7 @@ const OrderReview = () => {
   useEffect(() => {
     const savedData = getDatabaseCart();
     const productKeys = Object.keys(savedData);
-    fetch(`https://peaceful-plains-09302.herokuapp.com/productsByKeys`, {
+    fetch(`http://localhost:4000/productsByKeys`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(productKeys),

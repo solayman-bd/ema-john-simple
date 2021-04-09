@@ -10,8 +10,8 @@ const ReviewItems = (props) => {
       <div className="item-div">
         <h6 className="text-info">{name}</h6>
         <img src={img} alt="" />
-        <p class="lead">Quantity: {quantity}</p>
-        <p class="lead">
+        <p className="lead">Quantity: {quantity}</p>
+        <p className="lead">
           <p>
             <small>Price: {price}</small>
           </p>

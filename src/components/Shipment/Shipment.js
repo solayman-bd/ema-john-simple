@@ -23,7 +23,7 @@ const Shipment = () => {
       orderTime: new Date(),
     };
 
-    fetch(`https://peaceful-plains-09302.herokuapp.com/addOrders`, {
+    fetch(`http://localhost:4000/addOrders`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(orderDetails),

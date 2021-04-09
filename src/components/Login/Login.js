@@ -49,6 +49,7 @@ function Login() {
     photo: "",
     password: "",
   });
+
   const handleBlur = (event) => {
     let fieldValid = true;
 
@@ -75,7 +76,7 @@ function Login() {
         (res) => {
           setUser(res);
           setLoggedInUser(res);
-          history.replace(from);
+          // history.replace(from);
         }
       );
     }
